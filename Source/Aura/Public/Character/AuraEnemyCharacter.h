@@ -4,14 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
+#include "Interaction/AuraHighlightInterface.h"
 #include "AuraEnemyCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class AURA_API AAuraEnemyCharacter : public AAuraCharacterBase
+class AURA_API AAuraEnemyCharacter : public AAuraCharacterBase, public IAuraHighlightInterface
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void SetActorHighlight(bool bActivateHighlight) override;
 };
