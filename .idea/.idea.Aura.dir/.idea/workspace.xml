@@ -7,11 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0cbd18fa-838d-4e1e-9f5b-893405f0f15d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Characters/Enemy/BP_SpearGoblinCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Dungeon/Checkpoint/Checkpoint_low.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/Aura/BP_AuraCharacter.uasset" beforeDir="false" />
-    </list>
+    <list default="true" id="0cbd18fa-838d-4e1e-9f5b-893405f0f15d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -228,7 +224,7 @@
       <updated>1700090380547</updated>
       <workItem from="1700090382924" duration="69000" />
       <workItem from="1700168134717" duration="573000" />
-      <workItem from="1700176022832" duration="2156000" />
+      <workItem from="1700176022832" duration="2158000" />
     </task>
     <servers />
   </component>
