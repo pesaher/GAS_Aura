@@ -16,5 +16,5 @@ class AURA_API AAuraEnemyCharacter : public AAuraCharacterBase, public IAuraHigh
 	GENERATED_BODY()
 
 public:
-	virtual void SetActorHighlight(bool bActivateHighlight) override;
+	virtual void SetActorHighlight_Implementation(bool bActivateHighlight) override;
 };

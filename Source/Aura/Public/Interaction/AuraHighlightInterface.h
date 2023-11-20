@@ -22,5 +22,8 @@ class AURA_API IAuraHighlightInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void SetActorHighlight(bool bActivateHighlight) = 0;
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetActorHighlight(bool bActivateHighlight);
+
+	virtual void SetActorHighlight_Implementation(bool bActivateHighlight) = 0;
 };

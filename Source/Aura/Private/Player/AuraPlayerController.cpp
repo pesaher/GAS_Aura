@@ -4,6 +4,7 @@
 #include "Player/AuraPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Interaction/AuraHighlightInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -11,6 +12,13 @@ AAuraPlayerController::AAuraPlayerController()
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
+}
+
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
 }
 
 void AAuraPlayerController::BeginPlay()
@@ -49,5 +57,28 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 		
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+	}
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, CursorHit);
+	if (CursorHit.bBlockingHit)
+	{
+		IAuraHighlightInterface* LastHighlightedActor = CurrentHighlightedActor;
+		CurrentHighlightedActor = 
+		Cast<IAuraHighlightInterface>(CursorHit.GetActor());
+		if (LastHighlightedActor != CurrentHighlightedActor)
+		{
+			if (LastHighlightedActor)
+			{
+				IAuraHighlightInterface::Execute_SetActorHighlight(Cast<UObject>(LastHighlightedActor), false);
+			}
+			if (CurrentHighlightedActor)
+			{
+				IAuraHighlightInterface::Execute_SetActorHighlight(CursorHit.GetActor(), true);
+			}
+		}
 	}
 }

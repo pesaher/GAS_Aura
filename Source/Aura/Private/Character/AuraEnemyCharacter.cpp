@@ -3,14 +3,6 @@
 
 #include "Character/AuraEnemyCharacter.h"
 
-void AAuraEnemyCharacter::SetActorHighlight(bool bActivateHighlight)
+void AAuraEnemyCharacter::SetActorHighlight_Implementation(bool bActivateHighlight)
 {
-	if (bActivateHighlight)
-	{
-		
-	}
-	else
-	{
-		
-	}
 }
