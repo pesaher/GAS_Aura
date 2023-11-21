@@ -19,3 +19,10 @@ AAuraEnemyCharacter::AAuraEnemyCharacter()
 void AAuraEnemyCharacter::SetActorHighlight_Implementation(bool bActivateHighlight)
 {
 }
+
+void AAuraEnemyCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}

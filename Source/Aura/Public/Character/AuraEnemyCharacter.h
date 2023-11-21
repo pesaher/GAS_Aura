@@ -17,6 +17,11 @@ class AURA_API AAuraEnemyCharacter : public AAuraCharacterBase, public IAuraHigh
 
 public:
 	AAuraEnemyCharacter();
-	
+
+	//~ Begin IAuraHighlightInterface
 	virtual void SetActorHighlight_Implementation(bool bActivateHighlight) override;
+	//~ End IAuraHighlightInterface
+
+protected:
+	virtual void BeginPlay() override;
 };
