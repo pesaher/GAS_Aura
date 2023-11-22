@@ -28,6 +28,7 @@ void AAuraEffectActor::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 			{
 				//TODO Change to GameplayEffect
 				const_cast<UAuraAttributeSet*>(AuraAttributeSet)->SetHealth(AuraAttributeSet->GetHealth() + 25.f);
+				const_cast<UAuraAttributeSet*>(AuraAttributeSet)->SetMana(AuraAttributeSet->GetMana() - 25.f);
 				Destroy();
 			}
 		}
