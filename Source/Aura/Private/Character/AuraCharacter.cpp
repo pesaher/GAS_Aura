@@ -7,7 +7,6 @@
 #include "Player/AuraPlayerController.h"
 #include "Player/AuraPlayerState.h"
 #include "UI/HUD/AuraHUD.h"
-#include "UI/WidgetController/AuraWidgetController.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -47,11 +46,11 @@ void AAuraCharacter::SetupAbilityActorInfo()
 
 	AttributeSet = AuraPlayerState->GetAttributeSet();
 
-	if (AAuraPlayerController* AuraPlayerController = Cast<AAuraPlayerController>(GetController()))
+	if (const AAuraPlayerController* AuraPlayerController = Cast<AAuraPlayerController>(GetController()))
 	{
 		if (AAuraHUD* AuraHUD = AuraPlayerController->GetHUD<AAuraHUD>())
 		{
-			AuraHUD->InitOverlay(FWidgetControllerParameters(AuraPlayerController, AuraPlayerState, AbilitySystemComponent, AttributeSet));
+			AuraHUD->InitOverlay(AuraPlayerState);
 		}
 	}
 }

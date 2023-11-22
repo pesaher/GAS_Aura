@@ -5,23 +5,24 @@
 #include "UI/Widget/AuraUserWidget.h"
 #include "UI/WidgetController/AuraOverlayWidgetController.h"
 
-UAuraOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetControllerParameters& InWidgetControllerParameters)
+UAuraOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(AAuraPlayerState* InPlayerState)
 {
 	if (OverlayWidgetController == nullptr)
 	{
 		OverlayWidgetController = NewObject<UAuraOverlayWidgetController>(this, OverlayWidgetControllerClass);
-		OverlayWidgetController->SetWidgetControllerParameters(InWidgetControllerParameters);
+		OverlayWidgetController->SetWidgetControllerParameters(InPlayerState);
 	}
 	return OverlayWidgetController;
 }
 
-void AAuraHUD::InitOverlay(const FWidgetControllerParameters& WidgetControllerParameters)
+void AAuraHUD::InitOverlay(AAuraPlayerState* InPlayerState)
 {
 	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, fill it in the AuraHUD child class"))
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, fill it in the AuraHUD child class"))
 
 	OverlayWidget = CreateWidget<UAuraUserWidget>(GetWorld(), OverlayWidgetClass);
-	GetOverlayWidgetController(WidgetControllerParameters);
+	GetOverlayWidgetController(InPlayerState);
 	OverlayWidget->SetWidgetController(OverlayWidgetController);
+	OverlayWidgetController->BroadcastInitialValues();
 	OverlayWidget->AddToViewport();
 }

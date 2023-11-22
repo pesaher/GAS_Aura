@@ -2,10 +2,16 @@
 
 #include "UI/WidgetController/AuraWidgetController.h"
 
-void UAuraWidgetController::SetWidgetControllerParameters(const FWidgetControllerParameters& InWidgetControllerParameters)
+#include "Player/AuraPlayerState.h"
+
+void UAuraWidgetController::SetWidgetControllerParameters(AAuraPlayerState* InPlayerState)
 {
-	PlayerController = InWidgetControllerParameters.PlayerController;
-	PlayerState = InWidgetControllerParameters.PlayerState;
-	AbilitySystemComponent = InWidgetControllerParameters.AbilitySystemComponent;
-	AttributeSet = InWidgetControllerParameters.AttributeSet;
+	PlayerState = InPlayerState;
+	PlayerController = PlayerState->GetPlayerController();
+	AbilitySystemComponent = PlayerState->GetAbilitySystemComponent();
+	AttributeSet = PlayerState->GetAttributeSet();
+}
+
+void UAuraWidgetController::BroadcastInitialValues()
+{
 }
