@@ -19,9 +19,9 @@ class AURA_API UAuraWidgetController : public UObject
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParameters(AAuraPlayerState* InPlayerState);
 
+	virtual void BindCallbacksToDependencies();
 	virtual void BroadcastInitialValues();
 
 protected:

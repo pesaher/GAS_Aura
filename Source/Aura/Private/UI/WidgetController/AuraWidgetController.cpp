@@ -10,6 +10,12 @@ void UAuraWidgetController::SetWidgetControllerParameters(AAuraPlayerState* InPl
 	PlayerController = PlayerState->GetPlayerController();
 	AbilitySystemComponent = PlayerState->GetAbilitySystemComponent();
 	AttributeSet = PlayerState->GetAttributeSet();
+
+	BindCallbacksToDependencies();
+}
+
+void UAuraWidgetController::BindCallbacksToDependencies()
+{
 }
 
 void UAuraWidgetController::BroadcastInitialValues()
