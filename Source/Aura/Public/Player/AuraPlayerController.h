@@ -40,5 +40,5 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> MoveAction;
 
-	IAuraHighlightInterface* CurrentHighlightedActor;
+	TObjectPtr<IAuraHighlightInterface> CurrentHighlightedActor;
 };
