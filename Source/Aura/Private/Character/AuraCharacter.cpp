@@ -1,7 +1,7 @@
 // Copyright pesaher
 
-
 #include "Character/AuraCharacter.h"
+
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerState.h"
@@ -38,9 +38,9 @@ void AAuraCharacter::SetupAbilityActorInfo()
 {
 	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
-	
+
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 	AbilitySystemComponent->InitAbilityActorInfo(AuraPlayerState, this);
-	
+
 	AttributeSet = AuraPlayerState->GetAttributeSet();
 }

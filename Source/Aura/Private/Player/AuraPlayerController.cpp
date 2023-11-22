@@ -1,7 +1,7 @@
 // Copyright pesaher
 
-
 #include "Player/AuraPlayerController.h"
+
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Interaction/AuraHighlightInterface.h"
@@ -9,7 +9,9 @@
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true;
-	
+
+	CurrentHighlightedActor = nullptr;
+
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
 }
@@ -54,7 +56,7 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 		const FRotator YawRotation(0.f, GetControlRotation().Yaw, 0.f);
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		
+
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
@@ -63,12 +65,11 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 void AAuraPlayerController::CursorTrace()
 {
 	FHitResult CursorHit;
-	GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, CursorHit);
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 	if (CursorHit.bBlockingHit)
 	{
 		IAuraHighlightInterface* LastHighlightedActor = CurrentHighlightedActor;
-		CurrentHighlightedActor = 
-		Cast<IAuraHighlightInterface>(CursorHit.GetActor());
+		CurrentHighlightedActor = Cast<IAuraHighlightInterface>(CursorHit.GetActor());
 		if (LastHighlightedActor != CurrentHighlightedActor)
 		{
 			if (LastHighlightedActor)

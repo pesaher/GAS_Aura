@@ -12,7 +12,7 @@ class UInputMappingContext;
 struct FInputActionValue;
 
 /**
- * 
+ *
  */
 UCLASS()
 class AURA_API AAuraPlayerController : public APlayerController
@@ -33,7 +33,7 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-	
+
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> AuraContext;
 

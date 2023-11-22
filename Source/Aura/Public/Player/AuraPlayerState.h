@@ -10,7 +10,7 @@
 class UAttributeSet;
 
 /**
- * 
+ *
  */
 UCLASS()
 class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInterface

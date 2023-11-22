@@ -14,7 +14,7 @@ class UAuraHighlightInterface : public UInterface
 };
 
 /**
- * 
+ *
  */
 class AURA_API IAuraHighlightInterface
 {
