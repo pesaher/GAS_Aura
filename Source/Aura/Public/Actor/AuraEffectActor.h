@@ -8,6 +8,29 @@
 
 class UGameplayEffect;
 
+UENUM(BlueprintType)
+enum class EAuraEffectPolicy
+{
+	None,
+	OnOverlap,
+	OnEndOverlap
+};
+
+USTRUCT(BlueprintType)
+struct FAuraEffect
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> GameplayEffectClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EAuraEffectPolicy EffectApplicationPolicy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EAuraEffectPolicy EffectRemovalPolicy;
+};
+
 UCLASS()
 class AURA_API AAuraEffectActor : public AActor
 {
@@ -22,9 +45,21 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* TargetActor, const TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
-	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+	UFUNCTION(BlueprintCallable)
+	void OnBeginOverlap(AActor* TargetActor);
+
+	UFUNCTION(BlueprintCallable)
+	void OnEndOverlap(AActor* TargetActor);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
-	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
+	bool bDestroyOnEffectRemoval;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
+	FAuraEffect InstantGameplayEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
+	FAuraEffect DurationGameplayEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
+	FAuraEffect InfiniteGameplayEffect;
 };
