@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ActiveGameplayEffectHandle.h"
 #include "GameFramework/Actor.h"
 #include "AuraEffectActor.generated.h"
 
@@ -24,10 +25,16 @@ struct FAuraEffect
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> GameplayEffectClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "GameplayEffectClass != nullptr", EditConditionHides))
 	EAuraEffectPolicy EffectApplicationPolicy;
+};
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+USTRUCT(BlueprintType)
+struct FAuraRemovableEffect : public FAuraEffect
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "GameplayEffectClassGameplayEffectClass != nullptr", EditConditionHides, DisplayAfter="EffectApplicationPolicy"))
 	EAuraEffectPolicy EffectRemovalPolicy;
 };
 
@@ -46,6 +53,9 @@ protected:
 	void ApplyEffectToTarget(AActor* TargetActor, const TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
 	UFUNCTION(BlueprintCallable)
+	void RemoveEffectFromTarget(AActor* TargetActor, const TSubclassOf<UGameplayEffect> GameplayEffectClass);
+
+	UFUNCTION(BlueprintCallable)
 	void OnBeginOverlap(AActor* TargetActor);
 
 	UFUNCTION(BlueprintCallable)
@@ -55,11 +65,13 @@ protected:
 	bool bDestroyOnEffectRemoval;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
-	FAuraEffect InstantGameplayEffect;
+	TArray<FAuraEffect> InstantGameplayEffects;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
-	FAuraEffect DurationGameplayEffect;
+	TArray<FAuraEffect> DurationGameplayEffects;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
-	FAuraEffect InfiniteGameplayEffect;
+	TArray<FAuraRemovableEffect> InfiniteGameplayEffects;
+
+	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveGameplayEffectHandlesMap;
 };
