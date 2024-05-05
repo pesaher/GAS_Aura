@@ -73,5 +73,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
 	TArray<FAuraRemovableEffect> InfiniteGameplayEffects;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="AppliedEffects")
+	float ActorLevel;
+
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveGameplayEffectHandlesMap;
 };
